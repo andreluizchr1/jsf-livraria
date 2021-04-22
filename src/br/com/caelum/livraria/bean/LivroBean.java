@@ -70,4 +70,8 @@ public class LivroBean {
 		return new DAO<Livro>(Livro.class).listaTodos();
 	}
 
+	public String formAutor() {
+		System.out.println("Executando formulario do autor");
+		return "autor?faces-redirect=true";
+	}
 }
