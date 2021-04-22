@@ -32,36 +32,42 @@ public class LivroBean {
 	public List<Autor> getAutores() {
 		return new DAO<Autor>(Autor.class).listaTodos();
 	}
-	
-	public List<Autor> getAutoresDoLivro(){
+
+	public List<Autor> getAutoresDoLivro() {
 		return this.livro.getAutores();
 	}
 
 	public void gravarAutor() {
 		Autor autor = new DAO<Autor>(Autor.class).buscaPorId(this.autorId);
 		this.livro.adicionaAutor(autor);
+		System.out.println("Autor gravado no livro " + autor.getNome());
 	}
 
 	public void gravar() {
 		System.out.println("Gravou " + this.livro.getTitulo());
 
 		if (livro.getAutores().isEmpty()) {
-			FacesContext.getCurrentInstance().addMessage("autor", new FacesMessage("Livro deve ter pelo menos um autor"));
+			FacesContext.getCurrentInstance().addMessage("autor",
+					new FacesMessage("Livro deve ter pelo menos um autor"));
 			return;
 		}
 
 		new DAO<Livro>(Livro.class).adiciona(this.livro);
 	}
-	
+
 	public void comecaComDigitoUm(FacesContext fc, UIComponent component, Object value) throws ValidatorException {
-	    String valor = value.toString();
-	    if (!valor.startsWith("1")) {
-	        throw new ValidatorException(new FacesMessage("Deveria começar com 1"));
-	    }
+		String valor = value.toString();
+		if (!valor.startsWith("1")) {
+			throw new ValidatorException(new FacesMessage("Deveria começar com 1"));
+		}
 	}
 
 	public Livro getLivro() {
 		return livro;
+	}
+
+	public List<Livro> getLivros() {
+		return new DAO<Livro>(Livro.class).listaTodos();
 	}
 
 }
