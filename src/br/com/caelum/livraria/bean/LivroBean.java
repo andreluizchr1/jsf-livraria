@@ -20,6 +20,8 @@ public class LivroBean {
 	private Livro livro = new Livro();
 
 	private Integer autorId;
+	
+	private Integer livroId;
 
 	public Integer getAutorId() {
 		return autorId;
@@ -94,4 +96,17 @@ public class LivroBean {
 		System.out.println("Executando formulario do autor");
 		return "autor?faces-redirect=true";
 	}
+	
+	public void carregaPelaId() {
+        this.livro = new DAO<Livro>(Livro.class).buscaPorId(this.livroId);
+    }
+
+	public Integer getLivroId() {
+		return livroId;
+	}
+
+	public void setLivroId(Integer livroId) {
+		this.livroId = livroId;
+	}
+	
 }
